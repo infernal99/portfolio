@@ -74,10 +74,11 @@ export function Contact() {
         </Reveal>
       </div>
 
-      <ul className="mt-16 grid gap-px border-t border-ivory/15 sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="mt-16 grid border-t border-ivory/20 sm:grid-cols-2 lg:grid-cols-4">
         {channels.map((c, i) => (
           <motion.li
             key={c.key}
+            className="border-b border-ivory/20 sm:border-r sm:last:border-r-0 lg:border-b-0"
             initial={reduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
@@ -88,17 +89,30 @@ export function Contact() {
               {...(c.external
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
-              className="group flex h-full flex-col justify-between gap-6 border-b border-ivory/15 py-7 pr-6 transition-colors hover:bg-ivory/[0.04] sm:border-b-0 sm:pl-6 sm:first:pl-0"
+              className="group flex h-full flex-col justify-between gap-8 px-5 py-7 transition-colors hover:bg-ivory/[0.06] sm:px-6"
             >
-              <span className="label text-ivory/40 transition-colors group-hover:text-ember">
-                {c.label}
+              {/* El nombre del canal es el rótulo de la columna: grande y con
+                  la flecha que anuncia adónde lleva. */}
+              <span className="flex items-center justify-between gap-4">
+                <span className="font-mono text-base uppercase tracking-[0.16em] text-ivory/75 transition-colors group-hover:text-ember sm:text-lg">
+                  {c.label}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="text-lg text-ivory/45 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-ember"
+                >
+                  {c.external ? "↗" : "→"}
+                </span>
               </span>
+
               <span>
-                <span className="block break-words text-lg transition-transform duration-300 group-hover:translate-x-1 sm:text-xl">
+                {/* El subrayado es lo que hace que se lea como enlace incluso
+                    sin pasar el ratón por encima. */}
+                <span className="block break-words text-lg underline decoration-ivory/30 decoration-1 underline-offset-4 transition-colors group-hover:decoration-ember sm:text-xl">
                   {c.value}
                 </span>
                 {c.note && (
-                  <span className="mt-1 block text-sm text-ivory/40">{c.note}</span>
+                  <span className="mt-2 block text-sm text-ivory/55">{c.note}</span>
                 )}
               </span>
             </a>
