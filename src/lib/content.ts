@@ -360,7 +360,7 @@ const es: Dictionary = {
       "Tres años, tres capas: hardware, código y producto. Cada paso me acercó a lo mismo — entender la máquina entera, de la placa base al usuario final.",
   },
   path: {
-    label: "01 — Trayectoria",
+    label: "03 — Trayectoria",
     title: "Cómo he llegado hasta aquí.",
     intro:
       "Una progresión con una dirección clara: de reparar máquinas a construir productos propios, y de ahí a la ingeniería.",
@@ -399,7 +399,7 @@ const es: Dictionary = {
     },
   },
   work: {
-    label: "02 — Proyectos",
+    label: "04 — Proyectos",
     title: "Lo que he construido.",
     intro:
       "Cuatro productos en producción, con su dominio, sus usuarios y sus decisiones técnicas. No son ejercicios de clase.",
@@ -446,7 +446,7 @@ const es: Dictionary = {
     },
   },
   stack: {
-    label: "03 — Stack",
+    label: "05 — Stack",
     title: "Con qué construyo.",
     intro:
       "Solo tecnologías que uso de verdad en los proyectos de arriba o que he trabajado en formación y prácticas.",
@@ -460,7 +460,7 @@ const es: Dictionary = {
     levels: { native: "Nativo", b1: "B1" },
   },
   now: {
-    label: "04 — Ahora",
+    label: "06 — Ahora",
     title: "Lo que viene.",
     body: [
       "Empiezo Ingeniería Informática en Tecnocampus, con la intención de construir la base teórica que sostenga todo lo que ya estoy haciendo en la práctica.",
@@ -469,7 +469,7 @@ const es: Dictionary = {
     ],
   },
   contact: {
-    label: "05 — Contacto",
+    label: "07 — Contacto",
     title: "Construyamos algo.",
     intro:
       "¿Un proyecto, una oportunidad o simplemente hablar de producto? Escríbeme.",
@@ -540,7 +540,7 @@ const en: Dictionary = {
       "Three years, three layers: hardware, code and product. Every step pushed me toward the same thing — understanding the whole machine, from the motherboard to the end user.",
   },
   path: {
-    label: "01 — Path",
+    label: "03 — Path",
     title: "How I got here.",
     intro:
       "A progression with a clear direction: from repairing machines to building my own products, and from there into engineering.",
@@ -579,7 +579,7 @@ const en: Dictionary = {
     },
   },
   work: {
-    label: "02 — Work",
+    label: "04 — Work",
     title: "What I've built.",
     intro:
       "Four products in production, each with its own domain, users and technical decisions. These are not class assignments.",
@@ -626,7 +626,7 @@ const en: Dictionary = {
     },
   },
   stack: {
-    label: "03 — Stack",
+    label: "05 — Stack",
     title: "What I build with.",
     intro:
       "Only technologies I actually use in the projects above or have worked with during my training and internships.",
@@ -640,7 +640,7 @@ const en: Dictionary = {
     levels: { native: "Native", b1: "B1" },
   },
   now: {
-    label: "04 — Now",
+    label: "06 — Now",
     title: "What's next.",
     body: [
       "I'm starting a Computer Engineering degree at Tecnocampus, to build the theoretical foundation underneath everything I'm already doing in practice.",
@@ -649,7 +649,7 @@ const en: Dictionary = {
     ],
   },
   contact: {
-    label: "05 — Contact",
+    label: "07 — Contact",
     title: "Let's build something.",
     intro:
       "A project, an opportunity, or just to talk product? Drop me a line.",

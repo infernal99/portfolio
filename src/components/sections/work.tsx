@@ -15,7 +15,13 @@ export function Work() {
   const { t } = useLang();
 
   return (
-    <section id="work" aria-label={t.nav.sections.work} className="relative bg-ivory">
+    <section
+      id="work"
+      aria-label={t.nav.sections.work}
+      // Trayectoria y Proyectos comparten fondo: sin esta línea no se veía
+      // dónde acababa una sección y empezaba la otra.
+      className="relative border-t border-ink/10 bg-ivory"
+    >
       <header className="px-5 pb-16 pt-28 sm:px-8 lg:px-14 lg:pr-32 lg:pt-36">
         <Reveal>
           <p className="label text-ember">{t.work.label}</p>

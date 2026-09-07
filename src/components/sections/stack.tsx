@@ -18,7 +18,7 @@ export function Stack() {
     <section
       id="stack"
       aria-label={t.nav.sections.stack}
-      className="relative z-10 bg-ivory px-5 py-28 sm:px-8 lg:px-14 lg:pr-32 lg:py-40"
+      className="relative z-10 border-t border-ink/10 bg-ivory px-5 py-28 sm:px-8 lg:px-14 lg:pr-32 lg:py-40"
     >
       <header>
         <Reveal>

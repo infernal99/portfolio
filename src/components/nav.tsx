@@ -6,7 +6,19 @@ import { useLang } from "@/components/lang-provider";
 import { SECTION_IDS, type SectionId } from "@/lib/content";
 import { EASE } from "@/components/motion-primitives";
 
-/** Marca la sección visible para el índice lateral y el overlay móvil. */
+/**
+ * Marca la sección visible para el índice lateral y el overlay móvil.
+ *
+ * Se calcula por geometría, no con IntersectionObserver: aquí hay secciones
+ * mucho más altas que la ventana (Proyectos ocupa cuatro pantallas), y una
+ * sección así nunca llega a ocupar el porcentaje del viewport que pide un
+ * `threshold`, así que nunca se activaba y el índice se quedaba señalando una
+ * sección anterior.
+ *
+ * La regla es simple: está activa la última sección cuyo inicio ya ha cruzado
+ * el centro vertical de la ventana: lo que marca el índice es, literalmente,
+ * la sección que ocupa la mitad de la pantalla.
+ */
 function useActiveSection() {
   const [active, setActive] = useState<SectionId>("hero");
 
@@ -14,19 +26,36 @@ function useActiveSection() {
     const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(
       (el): el is HTMLElement => el !== null,
     );
+    if (sections.length === 0) return;
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(visible.target.id as SectionId);
-      },
-      { threshold: [0.25, 0.5], rootMargin: "-20% 0px -35% 0px" },
-    );
+    const update = () => {
+      const line = window.innerHeight * 0.5;
+      let current = sections[0].id;
 
-    sections.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= line) current = section.id;
+      }
+
+      // Al final del documento gana siempre la última sección: si no, la de
+      // contacto no llega a marcarse porque su inicio queda por debajo de la
+      // línea aunque esté ocupando toda la pantalla.
+      const atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+      if (atBottom) current = sections[sections.length - 1].id;
+
+      setActive(current as SectionId);
+    };
+
+    // En el siguiente frame: el layout ya está resuelto y la medida es real.
+    const frame = requestAnimationFrame(update);
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, []);
 
   return active;
