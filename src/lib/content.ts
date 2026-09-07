@@ -49,6 +49,15 @@ export interface Project {
   stack: string[];
   /** Acento cálido propio de la pieza, dentro de la paleta del sitio. */
   accent: string;
+  /**
+   * Fondo propio del panel. Las piezas se apilan una sobre otra al hacer
+   * scroll: si compartieran tono, el borde por el que una se desliza sobre la
+   * anterior sería invisible y el corte parecería un error de maquetación.
+   * La secuencia va de oscuro a arena, oscureciéndose paso a paso.
+   */
+  surface: string;
+  /** Si el panel se compone sobre fondo oscuro. */
+  dark: boolean;
 }
 
 export const PROJECTS: Project[] = [
@@ -72,6 +81,8 @@ export const PROJECTS: Project[] = [
       "Motion",
     ],
     accent: "#C2571E",
+    surface: "#171512",
+    dark: true,
   },
   {
     id: "gym-tracker",
@@ -94,6 +105,8 @@ export const PROJECTS: Project[] = [
       "Zod",
     ],
     accent: "#8A6A3F",
+    surface: "#F6F1E8",
+    dark: false,
   },
   {
     id: "roady",
@@ -116,6 +129,8 @@ export const PROJECTS: Project[] = [
       "PWA",
     ],
     accent: "#A8542C",
+    surface: "#EDE4D5",
+    dark: false,
   },
   {
     id: "velhoura",
@@ -128,6 +143,8 @@ export const PROJECTS: Project[] = [
     featured: false,
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "E-commerce"],
     accent: "#6E5B47",
+    surface: "#E3D8C4",
+    dark: false,
   },
 ];
 

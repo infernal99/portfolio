@@ -24,7 +24,7 @@ export function Work() {
           <MaskedLines lines={[t.work.title]} />
         </h2>
         <Reveal delay={0.12}>
-          <p className="mt-6 max-w-[48ch] text-lg text-ink/60">{t.work.intro}</p>
+          <p className="mt-6 max-w-[48ch] text-lg text-ink/75">{t.work.intro}</p>
         </Reveal>
       </header>
 
@@ -43,14 +43,16 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
   const copy = t.work.projects[project.id];
   const featured = project.featured;
 
-  const dark = featured;
+  const dark = project.dark;
 
   return (
     <article
-      className={`sticky top-0 flex min-h-[100svh] flex-col justify-center overflow-hidden px-5 py-20 sm:px-8 lg:px-14 ${
-        dark ? "bg-ink text-ivory" : "bg-ivory-dim text-ink"
+      // Cada pieza trae su propio fondo y una línea superior: al apilarse, el
+      // canto por el que una se desliza sobre la anterior tiene que leerse.
+      className={`sticky top-0 flex min-h-[100svh] flex-col justify-center overflow-hidden border-t px-5 py-20 sm:px-8 lg:px-14 ${
+        dark ? "border-ivory/15 text-ivory" : "border-ink/10 text-ink"
       }`}
-      style={{ zIndex: position + 1 }}
+      style={{ zIndex: position + 1, backgroundColor: project.surface }}
     >
       <div className="mx-auto grid w-full max-w-[100rem] gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-16">
         {/* Texto */}
@@ -66,7 +68,7 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
             {featured && (
               <span className="label text-ember">{t.work.featured}</span>
             )}
-            <span className={`label ${dark ? "text-ivory/40" : "text-ink/40"}`}>
+            <span className={`label ${dark ? "text-ivory/60" : "text-ink/65"}`}>
               {project.year}
             </span>
           </div>
@@ -92,20 +94,20 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
 
           <dl className="mt-8 grid gap-6 sm:grid-cols-2">
             <div>
-              <dt className={`label ${dark ? "text-ivory/40" : "text-ink/40"}`}>
+              <dt className={`label ${dark ? "text-ivory/60" : "text-ink/65"}`}>
                 {t.work.role}
               </dt>
-              <dd className={`mt-2 text-sm ${dark ? "text-ivory/75" : "text-ink/75"}`}>
+              <dd className={`mt-2 text-sm ${dark ? "text-ivory/75" : "text-ink/80"}`}>
                 {copy.role}
               </dd>
             </div>
             <div>
-              <dt className={`label ${dark ? "text-ivory/40" : "text-ink/40"}`}>
+              <dt className={`label ${dark ? "text-ivory/60" : "text-ink/65"}`}>
                 {t.work.problem}
               </dt>
               <dd
                 className={`mt-2 text-sm leading-relaxed ${
-                  dark ? "text-ivory/75" : "text-ink/75"
+                  dark ? "text-ivory/75" : "text-ink/80"
                 }`}
               >
                 {copy.problem}
@@ -115,14 +117,14 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
 
           <p
             className={`mt-6 max-w-[58ch] text-sm leading-relaxed ${
-              dark ? "text-ivory/60" : "text-ink/60"
+              dark ? "text-ivory/60" : "text-ink/75"
             }`}
           >
             {copy.description}
           </p>
 
           <div className="mt-7">
-            <p className={`label ${dark ? "text-ivory/40" : "text-ink/40"}`}>
+            <p className={`label ${dark ? "text-ivory/60" : "text-ink/65"}`}>
               {t.work.stack}
             </p>
             <ul className="mt-3 flex flex-wrap gap-2">
@@ -132,7 +134,7 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
                   className={`rounded-full border px-3 py-1 text-xs ${
                     dark
                       ? "border-ivory/20 text-ivory/70"
-                      : "border-ink/15 text-ink/70"
+                      : "border-ink/25 text-ink/75"
                   }`}
                 >
                   {tech}
@@ -183,9 +185,14 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
               }`}
             >
               <div
-                className={`flex items-center gap-2 px-4 py-3 ${
-                  dark ? "bg-ink-soft" : "bg-sand"
-                }`}
+                className="flex items-center gap-2 px-4 py-3"
+                // Tinte derivado del fondo del panel, no un color fijo: así la
+                // barra del navegador se separa del panel sea cual sea su tono.
+                style={{
+                  backgroundColor: dark
+                    ? "rgba(246, 241, 232, 0.08)"
+                    : "rgba(23, 21, 18, 0.08)",
+                }}
               >
                 <span className="flex gap-1.5" aria-hidden="true">
                   {[0, 1, 2].map((d) => (
@@ -199,7 +206,7 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
                 </span>
                 <span
                   className={`ml-2 truncate font-mono text-[11px] ${
-                    dark ? "text-ivory/45" : "text-ink/45"
+                    dark ? "text-ivory/55" : "text-ink/70"
                   }`}
                 >
                   {project.domain}
@@ -235,7 +242,7 @@ function StatusTag({ status, dark }: { status: Project["status"]; dark: boolean 
         aria-hidden="true"
         className={`h-1.5 w-1.5 rounded-full ${live ? "bg-ember" : "bg-clay"}`}
       />
-      <span className={dark ? "text-ivory/70" : "text-ink/70"}>
+      <span className={dark ? "text-ivory/70" : "text-ink/75"}>
         {t.work.status[status]}
       </span>
     </span>
