@@ -101,6 +101,17 @@ responde "enviado" y no manda nada.
 - **Las comprobaciones de tamaño usan `useMediaQuery`** ([`src/lib/use-media-query.ts`](src/lib/use-media-query.ts)),
   no una lectura única de `window.innerWidth` en un efecto: medir una sola vez
   al montar dejaba el 3D apagado si la ventana arrancaba estrecha.
+- **La trayectoria no secuestra el scroll.** Fue una fila horizontal movida
+  por el scroll de la página y se leía fatal: cualquier gesto mínimo
+  desplazaba el texto que estabas leyendo. Ahora es una línea temporal
+  vertical y lo único que reacciona al scroll es el raíl, que se dibuja por
+  detrás. Si vuelve la tentación del scroll horizontal, este es el motivo por
+  el que se quitó.
+- **Las secciones reservan un carril a la derecha (`lg:pr-32`)** para el índice
+  lateral fijo, que al ser `position: fixed` no participa del flujo. Sin ese
+  hueco se superpone al contenido. Por lo mismo, el índice solo muestra el
+  nombre de la sección al apuntarla: enseñarlo siempre lo hacía tan ancho que
+  se comía la última columna.
 - **El modal de contacto se cierra por estado de React, nunca por el cierre
   nativo del `<dialog>`** ([`src/components/contact-dialog.tsx`](src/components/contact-dialog.tsx)).
   El `onCancel` del Escape se cancela a propósito. Dejar que el navegador lo

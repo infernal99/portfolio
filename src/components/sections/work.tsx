@@ -16,7 +16,7 @@ export function Work() {
 
   return (
     <section id="work" aria-label={t.nav.sections.work} className="relative bg-ivory">
-      <header className="px-5 pb-16 pt-28 sm:px-8 lg:px-14 lg:pt-36">
+      <header className="px-5 pb-16 pt-28 sm:px-8 lg:px-14 lg:pr-32 lg:pt-36">
         <Reveal>
           <p className="label text-ember">{t.work.label}</p>
         </Reveal>
@@ -49,7 +49,7 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
     <article
       // Cada pieza trae su propio fondo y una línea superior: al apilarse, el
       // canto por el que una se desliza sobre la anterior tiene que leerse.
-      className={`sticky top-0 flex min-h-[100svh] flex-col justify-center overflow-hidden border-t px-5 py-20 sm:px-8 lg:px-14 ${
+      className={`sticky top-0 flex min-h-[100svh] flex-col justify-center overflow-hidden border-t px-5 py-20 sm:px-8 lg:px-14 lg:pr-32 ${
         dark ? "border-ivory/15 text-ivory" : "border-ink/10 text-ink"
       }`}
       style={{ zIndex: position + 1, backgroundColor: project.surface }}

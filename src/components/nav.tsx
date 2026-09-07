@@ -131,11 +131,13 @@ export function Nav() {
                   aria-current={isActive ? "true" : undefined}
                   className="group flex items-center justify-end gap-3"
                 >
+                  {/* El nombre solo aparece al apuntar. Mostrarlo siempre en
+                      la sección activa hacía el índice tan ancho que se
+                      superponía al contenido de la derecha. La sección activa
+                      se distingue igual: número en ámbar y raya más larga. */}
                   <span
-                    className={`label transition-all duration-300 ${
-                      isActive
-                        ? "text-ember opacity-100"
-                        : "text-ink/50 opacity-0 group-hover:opacity-100"
+                    className={`label opacity-0 transition-all duration-300 group-hover:opacity-100 ${
+                      isActive ? "text-ember" : "text-ink/50"
                     }`}
                   >
                     {t.nav.sections[id]}

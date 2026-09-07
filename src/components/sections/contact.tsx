@@ -67,7 +67,7 @@ export function Contact() {
     <footer
       id="contact"
       aria-label={t.nav.sections.contact}
-      className="relative z-10 flex min-h-[100svh] flex-col justify-between overflow-hidden bg-ink px-5 pb-8 pt-28 text-ivory sm:px-8 lg:px-14"
+      className="relative z-10 flex min-h-[100svh] flex-col justify-between overflow-hidden bg-ink px-5 pb-8 pt-28 text-ivory sm:px-8 lg:px-14 lg:pr-32"
     >
       <div>
         <Reveal>
