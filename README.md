@@ -67,7 +67,7 @@ se despliega.
 
 ## El formulario de contacto
 
-La celda **EMAIL** del cierre lleva al formulario, que envía a través de
+El botón **EMAIL** del cierre abre el formulario en una ventana modal, que envía a través de
 [Resend](https://resend.com) desde la server action
 [`src/app/actions.ts`](src/app/actions.ts). No usa el SDK: es una llamada
 `fetch` a su API, para no arrastrar una dependencia por tres campos.
@@ -101,3 +101,9 @@ responde "enviado" y no manda nada.
 - **Las comprobaciones de tamaño usan `useMediaQuery`** ([`src/lib/use-media-query.ts`](src/lib/use-media-query.ts)),
   no una lectura única de `window.innerWidth` en un efecto: medir una sola vez
   al montar dejaba el 3D apagado si la ventana arrancaba estrecha.
+- **El modal de contacto se cierra por estado de React, nunca por el cierre
+  nativo del `<dialog>`** ([`src/components/contact-dialog.tsx`](src/components/contact-dialog.tsx)).
+  El `onCancel` del Escape se cancela a propósito. Dejar que el navegador lo
+  cerrara por su cuenta desincronizaba el estado: React lo seguía creyendo
+  abierto, no se ejecutaba la limpieza del efecto y **el `body` se quedaba con
+  `overflow: hidden`**, es decir, la página entera sin scroll.

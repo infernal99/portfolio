@@ -8,7 +8,7 @@ import { PROFILE } from "@/lib/content";
 
 const INITIAL: ContactState = { code: null };
 
-export function ContactForm() {
+export function ContactForm({ showHeading = true }: { showHeading?: boolean }) {
   const { t } = useLang();
   const copy = t.contact.form;
   const [state, action] = useActionState(sendContact, INITIAL);
@@ -25,13 +25,15 @@ export function ContactForm() {
     "mt-2 w-full rounded-md border border-ivory/25 bg-ivory/[0.04] px-4 py-3 text-ivory placeholder:text-ivory/35 transition-colors focus:border-ember focus:outline-none focus:ring-1 focus:ring-ember";
 
   return (
-    <div id="contact-form" className="scroll-mt-24">
-      <h3 className="font-mono text-base uppercase tracking-[0.16em] text-ivory/75 sm:text-lg">
-        {copy.heading}
-      </h3>
-      <p className="mt-3 max-w-[46ch] text-sm text-ivory/60">{copy.intro}</p>
+    <div>
+      {showHeading && (
+        <h3 className="font-mono text-base uppercase tracking-[0.16em] text-ivory/75 sm:text-lg">
+          {copy.heading}
+        </h3>
+      )}
+      <p className="max-w-[46ch] text-sm text-ivory/60">{copy.intro}</p>
 
-      <form action={action} className="mt-7 max-w-xl">
+      <form action={action} className="mt-6">
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <label htmlFor={`${ids}-name`} className="label text-ivory/60">
