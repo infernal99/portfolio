@@ -379,7 +379,7 @@ const es: Dictionary = {
     role: "Rol",
     problem: "Qué resuelve",
     stack: "Stack",
-    preview: "Vista previa en vivo de",
+    preview: "Captura de la web de",
     projects: {
       "velhoura-empyre": {
         role: "Cofundador · Desarrollo y producto",
@@ -539,7 +539,7 @@ const en: Dictionary = {
     role: "Role",
     problem: "What it solves",
     stack: "Stack",
-    preview: "Live preview of",
+    preview: "Screenshot of",
     projects: {
       "velhoura-empyre": {
         role: "Co-founder · Development and product",

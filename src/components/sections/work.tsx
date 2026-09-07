@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { useLang } from "@/components/lang-provider";
 import { PROJECTS, type Project } from "@/lib/content";
 import { MaskedLines, Reveal } from "@/components/motion-primitives";
-import { useMediaQuery } from "@/lib/use-media-query";
 
 /**
  * Proyectos. Cada pieza ocupa la pantalla entera y se queda fija mientras la
@@ -44,36 +43,10 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
   const copy = t.work.projects[project.id];
   const featured = project.featured;
 
-  const ref = useRef<HTMLElement>(null);
-  const [showPreview, setShowPreview] = useState(false);
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
-
-  // La vista previa es un sitio entero dentro de un iframe: no se carga hasta
-  // que el panel está a punto de verse, y solo en pantallas grandes. La
-  // condición se reevalúa al redimensionar: comprobarla una sola vez dejaba la
-  // vista previa apagada para siempre si la ventana arrancaba estrecha.
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || !isDesktop) return;
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShowPreview(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: "400px 0px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [isDesktop]);
-
   const dark = featured;
 
   return (
     <article
-      ref={ref}
       className={`sticky top-0 flex min-h-[100svh] flex-col justify-center overflow-hidden px-5 py-20 sm:px-8 lg:px-14 ${
         dark ? "bg-ink text-ivory" : "bg-ivory-dim text-ink"
       }`}
@@ -189,9 +162,8 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
           </a>
         </div>
 
-        {/* Vista previa en vivo del sitio real. */}
+        {/* Captura del sitio real, dentro de un marco de navegador. */}
         <motion.div
-          className="hidden lg:block"
           initial={reduced ? { opacity: 0 } : { opacity: 0, y: 30, scale: 0.97 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-15%" }}
@@ -234,66 +206,23 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
                 </span>
               </div>
 
-              <LivePreview project={project} show={showPreview} />
+              <div className="relative aspect-16/10 w-full overflow-hidden bg-white">
+                <Image
+                  src={`/projects/${project.id}.webp`}
+                  alt={`${t.work.preview} ${project.name}`}
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+                  // La primera pieza entra en el primer pantallazo de la
+                  // sección; el resto puede esperar a acercarse.
+                  priority={position === 0}
+                />
+              </div>
             </div>
           </a>
         </motion.div>
       </div>
     </article>
-  );
-}
-
-/** Ancho al que se renderiza el sitio embebido antes de reducirlo. */
-const PREVIEW_WIDTH = 1440;
-
-/**
- * El sitio real dentro de un marco. Se renderiza a ancho de escritorio y se
- * escala al hueco disponible, para que la vista previa enseñe el diseño que
- * vería un visitante y no la versión móvil comprimida.
- */
-function LivePreview({ project, show }: { project: Project; show: boolean }) {
-  const { t } = useLang();
-  const boxRef = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(0);
-
-  useEffect(() => {
-    const el = boxRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(([entry]) => {
-      setScale(entry.contentRect.width / PREVIEW_WIDTH);
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={boxRef}
-      className="relative aspect-16/10 w-full overflow-hidden bg-white"
-    >
-      {show && scale > 0 ? (
-        <iframe
-          src={project.url}
-          title={`${t.work.preview} ${project.name}`}
-          loading="lazy"
-          sandbox="allow-scripts allow-same-origin"
-          tabIndex={-1}
-          className="pointer-events-none absolute left-0 top-0 origin-top-left border-0"
-          style={{
-            width: `${PREVIEW_WIDTH}px`,
-            height: `${PREVIEW_WIDTH * (10 / 16)}px`,
-            transform: `scale(${scale})`,
-          }}
-        />
-      ) : (
-        <div
-          className="h-full w-full"
-          style={{
-            background: `linear-gradient(135deg, ${project.accent}22, ${project.accent}05)`,
-          }}
-        />
-      )}
-    </div>
   );
 }
 

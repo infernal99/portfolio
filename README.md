@@ -7,7 +7,21 @@ npm install
 npm run dev      # http://localhost:3000
 npm run build    # build de producción
 npm run lint
+npm run shots    # vuelve a capturar las imágenes de los proyectos
 ```
+
+## Las imágenes de los proyectos
+
+Las cuatro imágenes de `public/projects/` son **capturas reales de las webs
+desplegadas**, no maquetas. Las genera
+[`scripts/capture-shots.mjs`](scripts/capture-shots.mjs) abriendo cada sitio en
+un Chrome headless a 1440×900, esperando a que terminen las animaciones de
+entrada y cerrando los avisos de cookies e instalación que taparían la
+captura.
+
+Cuando rediseñes cualquiera de los cuatro proyectos, ejecuta `npm run shots` y
+el portfolio queda al día. Necesita un Chrome instalado; si no está en la ruta
+habitual, pásalo con `CHROME_PATH=/ruta/a/chrome.exe`.
 
 ## Stack
 
@@ -58,8 +72,4 @@ apuntan a `localhost`.
   dibuja la misma silueta en SVG, con coste cero.
 - **Las comprobaciones de tamaño usan `useMediaQuery`** ([`src/lib/use-media-query.ts`](src/lib/use-media-query.ts)),
   no una lectura única de `window.innerWidth` en un efecto: medir una sola vez
-  al montar dejaba el 3D y las vistas previas apagados si la ventana arrancaba
-  estrecha.
-- **Las vistas previas de los proyectos son iframes de los sitios reales**, no
-  capturas: nunca se quedan desactualizadas. Se cargan solo al acercarse a su
-  panel y solo en escritorio.
+  al montar dejaba el 3D apagado si la ventana arrancaba estrecha.
