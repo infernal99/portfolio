@@ -50,17 +50,45 @@ las propias webs desplegadas. **No hay métricas de negocio, cifras de usuarios
 ni testimonios**, porque no hay forma de verificarlos. Si añades algo, mantén
 esa regla.
 
-## Antes de desplegar
+## Variables de entorno
 
-Define la URL pública para que el Open Graph y la canónica apunten al dominio
-real:
+Copia [`.env.example`](.env.example) a `.env.local` y rellénalo. Ninguna es
+obligatoria para que el sitio arranque, pero sin ellas dos cosas no funcionan:
 
-```
-NEXT_PUBLIC_SITE_URL=https://tu-dominio.com
-```
+| Variable | Para qué |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | URL pública. Sin ella, el Open Graph y la canónica apuntan a `localhost` |
+| `RESEND_API_KEY` | Envío del formulario de contacto |
+| `CONTACT_TO_EMAIL` | A dónde llegan los mensajes (por defecto, el email del CV) |
+| `CONTACT_FROM_EMAIL` | Remitente (por defecto `onboarding@resend.dev`) |
 
-Sin esa variable el sitio funciona igual, pero las URL absolutas de metadata
-apuntan a `localhost`.
+En Vercel hay que definirlas también en el panel del proyecto: `.env.local` no
+se despliega.
+
+## El formulario de contacto
+
+La celda **EMAIL** del cierre lleva al formulario, que envía a través de
+[Resend](https://resend.com) desde la server action
+[`src/app/actions.ts`](src/app/actions.ts). No usa el SDK: es una llamada
+`fetch` a su API, para no arrastrar una dependencia por tres campos.
+
+Cómo ponerlo en marcha:
+
+1. Crea una cuenta en [resend.com](https://resend.com) (plan gratuito: 3.000
+   emails al mes) y genera una API key.
+2. Ponla en `RESEND_API_KEY`, en `.env.local` y en Vercel.
+3. Con el remitente por defecto (`onboarding@resend.dev`) **solo se puede
+   escribir a la dirección dueña de la cuenta de Resend**. Para recibir en
+   cualquier otra, verifica un dominio en Resend y pon el remitente en
+   `CONTACT_FROM_EMAIL`.
+
+**Si falta la clave, el formulario no finge que ha enviado nada**: dice en
+pantalla que el envío no está configurado y ofrece el correo directo, de modo
+que un mensaje nunca se pierde en silencio. Lo mismo si Resend devuelve error.
+
+Contra los bots hay un campo trampa (`company`), colocado fuera de la vista
+pero sin `display:none`, que es lo que los delata. Si llega relleno, la acción
+responde "enviado" y no manda nada.
 
 ## Decisiones que conviene no deshacer sin querer
 

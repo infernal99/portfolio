@@ -307,6 +307,19 @@ export interface Dictionary {
     studioLabel: string;
     studioNote: string;
     footer: string;
+    form: {
+      heading: string;
+      intro: string;
+      name: string;
+      email: string;
+      message: string;
+      send: string;
+      sending: string;
+      ok: string;
+      /** Mensajes por código de error devuelto por la server action. */
+      errors: Record<string, string>;
+      fallback: string;
+    };
   };
   a11y: { langToggle: string; toTop: string };
 }
@@ -467,6 +480,26 @@ const es: Dictionary = {
     studioLabel: "Velhoura",
     studioNote: "El estudio que cofundé",
     footer: "Diseñado y desarrollado por Ian Monfil",
+    form: {
+      heading: "Escríbeme",
+      intro:
+        "Cuéntame qué tienes en mente y te respondo al correo desde el que escribas.",
+      name: "Nombre",
+      email: "Tu email",
+      message: "Mensaje",
+      send: "Enviar mensaje",
+      sending: "Enviando…",
+      ok: "Mensaje enviado. Te respondo en cuanto lo lea.",
+      errors: {
+        invalid_name: "Dime cómo te llamas.",
+        invalid_email: "Ese correo no parece válido.",
+        invalid_message: "Escribe un mensaje algo más largo.",
+        not_configured:
+          "El envío no está configurado todavía. Escríbeme directamente:",
+        send_failed: "No he podido enviarlo. Prueba a escribirme directamente:",
+      },
+      fallback: "Escribir por correo",
+    },
   },
   a11y: { langToggle: "Cambiar idioma", toTop: "Volver arriba" },
 };
@@ -627,6 +660,25 @@ const en: Dictionary = {
     studioLabel: "Velhoura",
     studioNote: "The studio I co-founded",
     footer: "Designed and developed by Ian Monfil",
+    form: {
+      heading: "Drop me a line",
+      intro:
+        "Tell me what you have in mind and I'll reply to the address you write from.",
+      name: "Name",
+      email: "Your email",
+      message: "Message",
+      send: "Send message",
+      sending: "Sending…",
+      ok: "Message sent. I'll reply as soon as I read it.",
+      errors: {
+        invalid_name: "Tell me your name.",
+        invalid_email: "That email doesn't look valid.",
+        invalid_message: "Write a slightly longer message.",
+        not_configured: "Sending isn't set up yet. Email me directly:",
+        send_failed: "I couldn't send it. Try emailing me directly:",
+      },
+      fallback: "Send an email",
+    },
   },
   a11y: { langToggle: "Switch language", toTop: "Back to top" },
 };

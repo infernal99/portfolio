@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { useLang } from "@/components/lang-provider";
 import { PROFILE } from "@/lib/content";
 import { MaskedLines, Reveal } from "@/components/motion-primitives";
+import { ContactForm } from "@/components/contact-form";
 
 interface Channel {
   key: string;
@@ -24,7 +25,10 @@ export function Contact() {
       key: "email",
       label: t.contact.emailLabel,
       value: PROFILE.email,
-      href: `mailto:${PROFILE.email}`,
+      note: t.contact.form.heading,
+      // Lleva al formulario, que está unos píxeles más arriba en esta misma
+      // sección; la dirección sigue a la vista para quien prefiera copiarla.
+      href: "#contact-form",
       external: false,
     },
     {
@@ -71,6 +75,12 @@ export function Contact() {
           <p className="mt-8 max-w-[42ch] text-lg text-ivory/60 sm:text-xl">
             {t.contact.intro}
           </p>
+        </Reveal>
+
+        <Reveal delay={0.2}>
+          <div className="mt-14 border-t border-ivory/20 pt-10">
+            <ContactForm />
+          </div>
         </Reveal>
       </div>
 
