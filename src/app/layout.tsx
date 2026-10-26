@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Barlow, Barlow_Condensed, Chakra_Petch } from "next/font/google";
 import { LangProvider } from "@/components/lang-provider";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import { LapProgress } from "@/components/lap-progress";
 import { Nav } from "@/components/nav";
 import { DICTIONARIES, PROFILE } from "@/lib/content";
 import "./globals.css";
@@ -84,6 +85,7 @@ export default function RootLayout({
       <body className="antialiased">
         <LangProvider>
           <SmoothScroll />
+          <LapProgress />
           <a className="skip-link label" href="#main">
             Saltar al contenido
           </a>

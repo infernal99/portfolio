@@ -718,3 +718,29 @@ export const SECTION_IDS = [
 ] as const;
 
 export type SectionId = (typeof SECTION_IDS)[number];
+
+/**
+ * Código de tres letras de cada sección, como el de cada piloto en la torre
+ * de tiempos de una retransmisión. El nombre completo sale en la etiqueta
+ * flotante y en el aria-label.
+ */
+export const SECTION_CODES: Record<Lang, Record<SectionId, string>> = {
+  es: {
+    hero: "INI",
+    manifesto: "MAN",
+    path: "TRA",
+    work: "PRO",
+    stack: "STK",
+    now: "AHO",
+    contact: "CON",
+  },
+  en: {
+    hero: "HOM",
+    manifesto: "MAN",
+    path: "PTH",
+    work: "WRK",
+    stack: "STK",
+    now: "NOW",
+    contact: "CON",
+  },
+};

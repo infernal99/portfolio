@@ -113,6 +113,18 @@ html.lenis body {
   );
 }
 
+/* Línea de meta: una fila de cuadros, dos tintas. */
+.checker {
+  height: 20px;
+  background: conic-gradient(
+      var(--color-ink) 25%,
+      var(--color-paper) 0 50%,
+      var(--color-ink) 0 75%,
+      var(--color-paper) 0
+    )
+    0 0 / 40px 40px;
+}
+
 /* Esquina cortada en bisel, como los rótulos de la parrilla de salida. */
 .slant {
   clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);

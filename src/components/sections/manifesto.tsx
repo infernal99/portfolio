@@ -6,9 +6,9 @@ import { useLang } from "@/components/lang-provider";
 import { MaskedLines, Reveal } from "@/components/motion-primitives";
 
 /**
- * Bloque invertido que corta la página en dos. La transición de entrada es un
- * clip-path que se abre con el scroll, no un fundido: da la sensación de que
- * el bloque oscuro se despliega sobre el papel.
+ * Bloque saturado que corta la página en dos. Su borde superior es una
+ * diagonal, como los cortes de los gráficos de una retransmisión de F1: la
+ * hipotenusa marca el cambio de sector.
  */
 export function Manifesto() {
   const ref = useRef<HTMLElement>(null);
@@ -20,7 +20,6 @@ export function Manifesto() {
     offset: ["start end", "end start"],
   });
 
-  const radius = useTransform(scrollYProgress, [0, 0.25], ["46% 46% 0 0", "0% 0% 0 0"]);
   const noteY = useTransform(scrollYProgress, [0, 1], ["12%", "-12%"]);
 
   return (
@@ -29,8 +28,9 @@ export function Manifesto() {
       data-saturated
       ref={ref}
       aria-label={t.nav.sections.manifesto}
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-azure px-5 py-28 text-paper sm:px-8 lg:px-14"
-      style={reduced ? undefined : { borderRadius: radius }}
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-azure px-5 pb-28 pt-[calc(var(--cut)+5rem)] text-paper [clip-path:polygon(0_var(--cut),100%_0,100%_100%,0_100%)] sm:px-8 lg:px-14"
+      // Cuánto baja la diagonal por el lado izquierdo.
+      style={{ "--cut": "clamp(2.5rem, 7vw, 6.5rem)" } as React.CSSProperties}
     >
       <div className="relative z-10 w-full">
         <h2 className="font-display max-w-[16ch] text-[clamp(3.2rem,10.5vw,9.5rem)]">

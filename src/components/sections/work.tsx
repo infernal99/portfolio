@@ -61,7 +61,15 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
       }`}
       style={{ zIndex: position + 1, backgroundColor: project.surface }}
     >
-      <div className="mx-auto grid w-full max-w-[100rem] gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-16">
+      {/* Dorsal: el número del proyecto, enorme y recortado por abajo. */}
+      <span
+        aria-hidden="true"
+        className="font-display pointer-events-none absolute -bottom-[0.14em] right-3 select-none text-[34vw] leading-none opacity-[0.08] lg:right-28 lg:text-[26rem]"
+      >
+        {project.index}
+      </span>
+
+      <div className="relative z-10 mx-auto grid w-full max-w-[100rem] gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-16">
         {/* Texto */}
         <div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">

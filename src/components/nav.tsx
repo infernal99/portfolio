@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useLang } from "@/components/lang-provider";
-import { SECTION_IDS, type SectionId } from "@/lib/content";
+import { SECTION_CODES, SECTION_IDS, type SectionId } from "@/lib/content";
 import { EASE } from "@/components/motion-primitives";
 
 /**
@@ -150,45 +150,45 @@ export function Nav() {
       </header>
 
       {/*
-        Índice numerado lateral, la navegación principal en escritorio. Va en una
-        cápsula sólida para que se lea igual sobre hielo, azur o petróleo. El
-        nombre de la sección sale como una etiqueta flotante al apuntarla: así
-        no ensancha la cápsula ni invade el contenido.
+        Torre de tiempos: la navegación principal en escritorio. Cada fila es una
+        sección, con su posición y un código de tres letras, como los pilotos en
+        la torre de una retransmisión. Es una pieza sólida y oscura para que se
+        lea igual sobre hielo, azur o petróleo. El nombre completo sale en una
+        etiqueta flotante al apuntar: así no ensancha la torre ni invade el
+        contenido.
       */}
       <nav
-        className="fixed right-5 top-1/2 z-40 hidden -translate-y-1/2 lg:block xl:right-9"
+        className="fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 lg:block xl:right-8"
         aria-label={t.nav.menu}
       >
-        <ul className="flex flex-col items-end gap-2.5 rounded-full bg-paper/90 px-3.5 py-4 shadow-lg shadow-ink/15 ring-1 ring-ink/10 backdrop-blur">
+        <ul className="overflow-hidden rounded-md bg-ink/95 shadow-xl shadow-ink/25 ring-1 ring-paper/20 backdrop-blur">
           {SECTION_IDS.map((id, i) => {
             const isActive = active === id;
             return (
-              <li key={id}>
+              <li key={id} className="border-b border-paper/10 last:border-b-0">
                 <a
                   href={`#${id}`}
                   aria-current={isActive ? "true" : undefined}
-                  className="group relative flex items-center gap-2.5"
+                  aria-label={t.nav.sections[id]}
+                  className={`group relative flex items-stretch transition-colors duration-200 ${
+                    isActive ? "bg-azure" : "hover:bg-paper/10"
+                  }`}
                 >
                   <span
-                    className="label slant pointer-events-none absolute right-full mr-5 whitespace-nowrap bg-ink py-1.5 pl-3 pr-5 text-paper opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+                    className="label slant pointer-events-none absolute right-full mr-4 whitespace-nowrap bg-azure py-1.5 pl-3 pr-5 text-paper opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
                   >
                     {t.nav.sections[id]}
                   </span>
                   <span
-                    className={`label tabular-nums transition-colors duration-300 ${
-                      isActive ? "text-azure" : "text-ink/75 group-hover:text-ink"
+                    className={`label flex w-7 items-center justify-center py-2 tabular-nums ${
+                      isActive ? "bg-volt text-ink" : "bg-paper/10 text-paper"
                     }`}
                   >
-                    {String(i + 1).padStart(2, "0")}
+                    {i + 1}
                   </span>
-                  <span
-                    aria-hidden="true"
-                    className={`h-[3px] transition-all duration-300 ${
-                      isActive
-                        ? "w-8 bg-azure"
-                        : "w-3 bg-ink/25 group-hover:w-6 group-hover:bg-ink/60"
-                    }`}
-                  />
+                  <span className="label flex w-12 items-center justify-center py-2 font-bold tracking-[0.14em] text-paper">
+                    {SECTION_CODES[lang][id]}
+                  </span>
                 </a>
               </li>
             );

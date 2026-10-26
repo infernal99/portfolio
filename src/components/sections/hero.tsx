@@ -120,7 +120,7 @@ export function Hero() {
             active={active}
           />
         ) : (
-          <StaticSolid />
+          <StaticTire />
         )}
       </div>
 
@@ -173,45 +173,64 @@ export function Hero() {
 }
 
 /**
- * Sustituto del canvas en móvil, equipos modestos y prefers-reduced-motion.
- * Misma silueta, coste cero.
+ * Sustituto del canvas en móvil, equipos modestos y prefers-reduced-motion:
+ * el mismo neumático, visto de frente y dibujado en SVG. Coste cero.
  */
-function StaticSolid() {
+function StaticTire() {
+  const spokes = [0, 1, 2, 3, 4].map((i) => {
+    const a = ((-90 + i * 72) * Math.PI) / 180;
+    return { x: 100 + Math.cos(a) * 44, y: 100 + Math.sin(a) * 44 };
+  });
+  const nut = [0, 1, 2, 3, 4, 5]
+    .map((i) => {
+      const a = (i * 60 * Math.PI) / 180;
+      return `${(100 + Math.cos(a) * 11).toFixed(1)},${(100 + Math.sin(a) * 11).toFixed(1)}`;
+    })
+    .join(" ");
+
   return (
     // En móvil ocupa el aire de la parte alta, lejos del titular; en pantallas
     // grandes vuelve al centro de su columna, donde iría el canvas.
     <div className="flex h-full w-full items-start justify-end pr-2 pt-20 sm:pt-24 lg:items-center lg:justify-center lg:pr-0 lg:pt-0">
       <svg
         viewBox="0 0 200 200"
-        className="h-[38vmin] w-[38vmin] max-w-full opacity-70 sm:h-[34vmin] sm:w-[34vmin] lg:h-[62vmin] lg:w-[62vmin] lg:opacity-90"
+        className="h-[40vmin] w-[40vmin] max-w-full sm:h-[36vmin] sm:w-[36vmin] lg:h-[62vmin] lg:w-[62vmin]"
         role="presentation"
       >
-        <defs>
-          <linearGradient id="solid-warm" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#34f5a0" />
-            <stop offset="50%" stopColor="#1f9bd8" />
-            <stop offset="100%" stopColor="#0a52d6" />
-          </linearGradient>
-        </defs>
-        <g transform="translate(100 100)">
-          <polygon
-            points="0,-78 68,-39 68,39 0,78 -68,39 -68,-39"
+        {/* Goma, con la sombra de los surcos en la banda de rodadura. */}
+        <circle cx="100" cy="100" r="92" fill="#0c1c26" />
+        {[88, 84, 80].map((r) => (
+          <circle
+            key={r}
+            cx="100"
+            cy="100"
+            r={r}
             fill="none"
-            stroke="#04283a"
-            strokeOpacity="0.28"
-            strokeWidth="1"
-          />
-          <polygon
-            points="0,-52 45,-26 45,26 0,52 -45,26 -45,-26"
-            fill="url(#solid-warm)"
-          />
-          <path
-            d="M0,-52 L0,52 M-45,-26 L45,26 M45,-26 L-45,26"
             stroke="#f2fcf9"
-            strokeOpacity="0.55"
-            strokeWidth="1"
+            strokeOpacity="0.1"
           />
+        ))}
+        {/* Marcas del flanco. */}
+        <circle
+          cx="100"
+          cy="100"
+          r="71"
+          fill="none"
+          stroke="#f2fcf9"
+          strokeWidth="5"
+          strokeDasharray="1.6 7.4"
+        />
+        {/* Aro de compuesto: el verde de los neumáticos de intermedios. */}
+        <circle cx="100" cy="100" r="60" fill="none" stroke="#34f5a0" strokeWidth="9" />
+        {/* Llanta. */}
+        <circle cx="100" cy="100" r="50" fill="#1d3b4d" />
+        <circle cx="100" cy="100" r="50" fill="none" stroke="#0a52d6" strokeWidth="2.5" />
+        <g stroke="#9fc2d6" strokeWidth="6">
+          {spokes.map((s, i) => (
+            <line key={i} x1="100" y1="100" x2={s.x} y2={s.y} />
+          ))}
         </g>
+        <polygon points={nut} fill="#34f5a0" />
       </svg>
     </div>
   );

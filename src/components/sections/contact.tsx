@@ -70,6 +70,9 @@ export function Contact() {
       aria-label={t.nav.sections.contact}
       className="relative z-10 flex min-h-[100svh] flex-col justify-between overflow-hidden bg-gradient-to-br from-azure via-azure to-teal px-5 pb-12 pt-28 text-paper sm:px-8 lg:px-14 lg:pr-32"
     >
+      {/* La meta: aquí acaba el recorrido. */}
+      <div className="checker absolute inset-x-0 top-0" aria-hidden="true" />
+
       <div>
         <Reveal>
           <p className="label text-volt">{t.contact.label}</p>

@@ -27,8 +27,19 @@ verde-azul. Todo vive en [`src/app/globals.css`](src/app/globals.css).
 
 Tipografía: **Barlow Condensed** en cursiva y mayúsculas para los titulares,
 **Barlow** para el cuerpo y **Chakra Petch** para los rótulos de telemetría.
-El bordillo (`.kerb`) y el corte en bisel (`.slant`) son los dos motivos
-gráficos de circuito.
+### Elementos de F1
+
+- **El objeto 3D es un neumático de intermedios**, procedural (un perfil girado
+  sobre su eje más unas primitivas: no hay modelo que descargar). Gira más
+  deprisa cuanto más rápido haces scroll. En móvil y con `prefers-reduced-motion`
+  se sustituye por la misma rueda dibujada en SVG.
+- **Torre de tiempos** en vez de índice lateral: cada sección es una fila con su
+  posición y un código de tres letras (`SECTION_CODES` en `content.ts`).
+- **Barra de vuelta** arriba del todo: el progreso de scroll, de azur a verde.
+- **Bordillo** (`.kerb`) al pie del hero, **línea de meta** (`.checker`) al
+  inicio del cierre y **bisel** (`.slant`) en los rótulos y botones.
+- **Dorsales**: el número de cada proyecto, enorme y recortado por abajo.
+- El borde superior del manifiesto es una diagonal, no una curva.
 
 ## Las imágenes de los proyectos
 
