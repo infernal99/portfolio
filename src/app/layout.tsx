@@ -1,29 +1,35 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
+import { Barlow, Barlow_Condensed, Chakra_Petch } from "next/font/google";
 import { LangProvider } from "@/components/lang-provider";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { Nav } from "@/components/nav";
 import { DICTIONARIES, PROFILE } from "@/lib/content";
 import "./globals.css";
 
-const display = Instrument_Serif({
+// Titulares: condensada y pesada, en cursiva, como el rotulado de una
+// retransmisión de F1 o MotoGP. Solo se cargan los pesos y estilos que se usan.
+const display = Barlow_Condensed({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["700", "800", "900"],
+  style: ["italic"],
   display: "swap",
-  variable: "--font-instrument-serif",
+  variable: "--font-barlow-condensed",
 });
 
-const sans = Inter({
+// Cuerpo de texto: la hermana "normal" de la anterior, para que casen.
+const sans = Barlow({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-barlow",
 });
 
-const mono = JetBrains_Mono({
+// Rótulos: angulosa y técnica, como la telemetría de un monoplaza.
+const mono = Chakra_Petch({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["500", "600", "700"],
   display: "swap",
-  variable: "--font-mono-label",
+  variable: "--font-chakra-petch",
 });
 
 const site = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -66,7 +72,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f6f1e8",
+  themeColor: "#f2fcf9",
   colorScheme: "light",
 };
 

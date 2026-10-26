@@ -66,20 +66,21 @@ export function Contact() {
   return (
     <footer
       id="contact"
+      data-saturated
       aria-label={t.nav.sections.contact}
-      className="relative z-10 flex min-h-[100svh] flex-col justify-between overflow-hidden bg-ink px-5 pb-8 pt-28 text-ivory sm:px-8 lg:px-14 lg:pr-32"
+      className="relative z-10 flex min-h-[100svh] flex-col justify-between overflow-hidden bg-gradient-to-br from-azure via-azure to-teal px-5 pb-12 pt-28 text-paper sm:px-8 lg:px-14 lg:pr-32"
     >
       <div>
         <Reveal>
-          <p className="label text-ember">{t.contact.label}</p>
+          <p className="label text-volt">{t.contact.label}</p>
         </Reveal>
 
-        <h2 className="font-display mt-6 text-[clamp(3rem,12vw,11rem)] leading-[0.9]">
+        <h2 className="font-display mt-6 text-[clamp(3rem,calc((100vw-2.5rem)/5.8),15rem)] leading-[0.86] sm:text-[clamp(3rem,calc((100vw-4rem)/5.8),15rem)] lg:text-[clamp(3rem,calc((100vw-11.5rem)/5.8),15rem)]">
           <MaskedLines lines={[t.contact.title]} stagger={0.1} />
         </h2>
 
         <Reveal delay={0.15}>
-          <p className="mt-8 max-w-[42ch] text-lg text-ivory/60 sm:text-xl">
+          <p className="mt-8 max-w-[42ch] text-xl font-medium text-paper/90 sm:text-2xl">
             {t.contact.intro}
           </p>
         </Reveal>
@@ -102,11 +103,11 @@ export function Contact() {
         ))}
       </ul>
 
-      <div className="mt-14 flex flex-wrap items-end justify-between gap-4 border-t border-ivory/15 pt-6">
-        <p className="label text-ivory/40">{t.contact.footer} · 2026</p>
+      <div className="mt-14 flex flex-wrap items-end justify-between gap-4 border-t border-paper/30 pt-6">
+        <p className="label text-paper/85">{t.contact.footer} · 2026</p>
         <a
           href="#hero"
-          className="label text-ivory/40 transition-colors hover:text-ember"
+          className="label text-paper/85 transition-colors hover:text-volt"
         >
           {t.a11y.toTop} ↑
         </a>
@@ -133,31 +134,31 @@ function ChannelButton({
   const content = (
     <>
       <span className="flex items-center justify-between gap-4">
-        <Icon className="text-ivory/85 transition-colors group-hover:text-ember" />
+        <Icon className="text-paper transition-colors group-hover:text-volt" />
         <span
           aria-hidden="true"
-          className="text-lg text-ivory/45 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-ember"
+          className="text-lg text-paper/80 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-volt"
         >
           {channel.href ? "↗" : "→"}
         </span>
       </span>
 
       <span className="mt-6 block">
-        <span className="block font-mono text-base uppercase tracking-[0.16em] text-ivory transition-colors group-hover:text-ember sm:text-lg">
+        <span className="block font-mono text-base uppercase tracking-[0.16em] text-paper transition-colors group-hover:text-volt sm:text-lg">
           {channel.label}
         </span>
-        <span className="mt-2 block break-words text-sm text-ivory/70">
+        <span className="mt-2 block break-words text-sm text-paper/95">
           {channel.value}
         </span>
         {channel.note && (
-          <span className="mt-1 block text-sm text-ivory/50">{channel.note}</span>
+          <span className="mt-1 block text-sm text-paper/80">{channel.note}</span>
         )}
       </span>
     </>
   );
 
   const shape =
-    "group flex h-full w-full flex-col rounded-xl border border-ivory/20 bg-ivory/[0.03] px-6 py-6 text-left transition-all duration-300 hover:-translate-y-1 hover:border-ember/60 hover:bg-ivory/[0.07]";
+    "group flex h-full w-full flex-col rounded-xl border border-paper/40 bg-paper/[0.08] px-6 py-6 text-left transition-all duration-300 hover:-translate-y-1 hover:border-volt hover:bg-paper/[0.16]";
 
   if (!channel.href) {
     return (

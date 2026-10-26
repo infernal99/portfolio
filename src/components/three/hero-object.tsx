@@ -47,15 +47,15 @@ function Solid({ pointer, scrollProgress }: SolidProps) {
       <mesh ref={core}>
         <icosahedronGeometry args={[1.24, 1]} />
         <meshStandardMaterial
-          color="#d9a273"
-          roughness={0.46}
-          metalness={0.3}
+          color="#1b8cff"
+          roughness={0.3}
+          metalness={0.22}
           flatShading
         />
       </mesh>
       <mesh ref={cage} scale={1.55}>
         <icosahedronGeometry args={[1.24, 0]} />
-        <meshBasicMaterial color="#171512" wireframe transparent opacity={0.22} />
+        <meshBasicMaterial color="#0a52d6" wireframe transparent opacity={0.42} />
       </mesh>
     </group>
   );
@@ -76,9 +76,9 @@ export default function HeroObject({
       camera={{ position: [0, 0, 6.4], fov: 40 }}
       style={{ pointerEvents: "none" }}
     >
-      <ambientLight intensity={1.05} color="#f6f1e8" />
-      <directionalLight position={[3, 4, 5]} intensity={1.25} color="#ffdcb8" />
-      <directionalLight position={[-4, -2, -3]} intensity={0.8} color="#c2571e" />
+      <ambientLight intensity={0.95} color="#ffffff" />
+      <directionalLight position={[3, 4, 5]} intensity={1.9} color="#ffffff" />
+      <directionalLight position={[-4, -2, -2]} intensity={1.5} color="#34f5a0" />
       <Solid pointer={pointer} scrollProgress={scrollProgress} />
     </Canvas>
   );

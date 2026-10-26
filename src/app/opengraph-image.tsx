@@ -16,10 +16,10 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#f6f1e8",
-          color: "#171512",
+          background: "linear-gradient(135deg, #f2fcf9 0%, #d6f5e8 55%, #cdebfb 100%)",
+          color: "#04283a",
           padding: "72px 80px",
-          fontFamily: "Georgia, serif",
+          fontFamily: "sans-serif", fontWeight: 800,
         }}
       >
         <div
@@ -29,7 +29,7 @@ export default function OpengraphImage() {
             fontSize: 22,
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            color: "#6b6355",
+            color: "#0b3b52",
             fontFamily: "monospace",
           }}
         >
@@ -46,7 +46,7 @@ export default function OpengraphImage() {
               fontSize: 168,
               lineHeight: 0.9,
               letterSpacing: "-0.03em",
-              color: "#c2571e",
+              color: "#0a52d6",
             }}
           >
             MONFIL
@@ -59,7 +59,7 @@ export default function OpengraphImage() {
             justifyContent: "space-between",
             alignItems: "flex-end",
             fontSize: 24,
-            color: "#4a443a",
+            color: "#0b3b52",
           }}
         >
           <span style={{ maxWidth: 620 }}>

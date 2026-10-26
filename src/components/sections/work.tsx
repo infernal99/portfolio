@@ -20,13 +20,13 @@ export function Work() {
       aria-label={t.nav.sections.work}
       // Trayectoria y Proyectos comparten fondo: sin esta línea no se veía
       // dónde acababa una sección y empezaba la otra.
-      className="relative border-t border-ink/10 bg-ivory"
+      className="relative border-t border-ink/10 bg-paper"
     >
       <header className="px-5 pb-16 pt-28 sm:px-8 lg:px-14 lg:pr-32 lg:pt-36">
         <Reveal>
-          <p className="label text-ember">{t.work.label}</p>
+          <p className="label text-azure">{t.work.label}</p>
         </Reveal>
-        <h2 className="font-display mt-4 max-w-[12ch] text-[clamp(2.6rem,8vw,7rem)]">
+        <h2 className="font-display mt-4 max-w-[12ch] text-[clamp(3.4rem,10.5vw,9.5rem)]">
           <MaskedLines lines={[t.work.title]} />
         </h2>
         <Reveal delay={0.12}>
@@ -53,10 +53,11 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
 
   return (
     <article
+      data-saturated={dark || undefined}
       // Cada pieza trae su propio fondo y una línea superior: al apilarse, el
       // canto por el que una se desliza sobre la anterior tiene que leerse.
       className={`sticky top-0 flex min-h-[100svh] flex-col justify-center overflow-hidden border-t px-5 py-20 sm:px-8 lg:px-14 lg:pr-32 ${
-        dark ? "border-ivory/15 text-ivory" : "border-ink/10 text-ink"
+        dark ? "border-paper/15 text-paper" : "border-ink/10 text-ink"
       }`}
       style={{ zIndex: position + 1, backgroundColor: project.surface }}
     >
@@ -65,16 +66,16 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
         <div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <span
-              className="label"
-              style={{ color: dark ? project.accent : undefined }}
+              className="label text-[1.05rem] font-bold"
+              style={{ color: project.accent }}
             >
               {project.index}
             </span>
             <StatusTag status={project.status} dark={dark} />
             {featured && (
-              <span className="label text-ember">{t.work.featured}</span>
+              <span className="label text-volt">{t.work.featured}</span>
             )}
-            <span className={`label ${dark ? "text-ivory/60" : "text-ink/65"}`}>
+            <span className={`label ${dark ? "text-paper/90" : "text-ink/70"}`}>
               {project.year}
             </span>
           </div>
@@ -83,8 +84,8 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
             className="font-display mt-5"
             style={{
               fontSize: featured
-                ? "clamp(2.8rem, 7.5vw, 6.5rem)"
-                : "clamp(2.4rem, 6vw, 5.25rem)",
+                ? "clamp(3.6rem, 10vw, 9rem)"
+                : "clamp(3.2rem, 8vw, 7rem)",
             }}
           >
             <MaskedLines lines={[project.name]} />
@@ -92,7 +93,7 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
 
           <p
             className={`mt-4 max-w-[30ch] text-xl leading-snug sm:text-2xl ${
-              dark ? "text-ivory/80" : "text-ink/80"
+              dark ? "text-paper" : "text-ink/85"
             }`}
           >
             {copy.tagline}
@@ -100,20 +101,20 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
 
           <dl className="mt-8 grid gap-6 sm:grid-cols-2">
             <div>
-              <dt className={`label ${dark ? "text-ivory/60" : "text-ink/65"}`}>
+              <dt className={`label ${dark ? "text-paper/90" : "text-ink/70"}`}>
                 {t.work.role}
               </dt>
-              <dd className={`mt-2 text-sm ${dark ? "text-ivory/75" : "text-ink/80"}`}>
+              <dd className={`mt-2 text-sm ${dark ? "text-paper" : "text-ink/85"}`}>
                 {copy.role}
               </dd>
             </div>
             <div>
-              <dt className={`label ${dark ? "text-ivory/60" : "text-ink/65"}`}>
+              <dt className={`label ${dark ? "text-paper/90" : "text-ink/70"}`}>
                 {t.work.problem}
               </dt>
               <dd
                 className={`mt-2 text-sm leading-relaxed ${
-                  dark ? "text-ivory/75" : "text-ink/80"
+                  dark ? "text-paper" : "text-ink/85"
                 }`}
               >
                 {copy.problem}
@@ -123,14 +124,14 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
 
           <p
             className={`mt-6 max-w-[58ch] text-sm leading-relaxed ${
-              dark ? "text-ivory/60" : "text-ink/75"
+              dark ? "text-paper/95" : "text-ink/80"
             }`}
           >
             {copy.description}
           </p>
 
           <div className="mt-7">
-            <p className={`label ${dark ? "text-ivory/60" : "text-ink/65"}`}>
+            <p className={`label ${dark ? "text-paper/90" : "text-ink/70"}`}>
               {t.work.stack}
             </p>
             <ul className="mt-3 flex flex-wrap gap-2">
@@ -139,7 +140,7 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
                   key={tech}
                   className={`rounded-full border px-3 py-1 text-xs ${
                     dark
-                      ? "border-ivory/20 text-ivory/70"
+                      ? "border-paper/40 text-paper"
                       : "border-ink/25 text-ink/75"
                   }`}
                 >
@@ -155,8 +156,8 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
             rel="noopener noreferrer"
             className={`group mt-9 inline-flex items-center gap-3 border-b pb-1 text-sm transition-colors ${
               dark
-                ? "border-ivory/30 text-ivory hover:border-ember hover:text-ember"
-                : "border-ink/30 text-ink hover:border-ember hover:text-ember"
+                ? "border-paper/50 text-paper hover:border-volt hover:text-volt"
+                : "border-ink/30 text-ink hover:border-azure hover:text-azure"
             }`}
           >
             <span className="label">{t.work.visit}</span>
@@ -187,7 +188,7 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
           >
             <div
               className={`overflow-hidden rounded-xl border shadow-2xl transition-transform duration-500 group-hover:-translate-y-1.5 ${
-                dark ? "border-ivory/15 shadow-black/40" : "border-ink/10 shadow-ink/10"
+                dark ? "border-paper/25 shadow-ink/40" : "border-ink/10 shadow-ink/10"
               }`}
             >
               <div
@@ -205,14 +206,14 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
                     <span
                       key={d}
                       className={`h-2 w-2 rounded-full ${
-                        dark ? "bg-ivory/25" : "bg-ink/20"
+                        dark ? "bg-paper/45" : "bg-ink/25"
                       }`}
                     />
                   ))}
                 </span>
                 <span
                   className={`ml-2 truncate font-mono text-[11px] ${
-                    dark ? "text-ivory/55" : "text-ink/70"
+                    dark ? "text-paper/85" : "text-ink/75"
                   }`}
                 >
                   {project.domain}
@@ -246,9 +247,11 @@ function StatusTag({ status, dark }: { status: Project["status"]; dark: boolean 
     <span className="label inline-flex items-center gap-2">
       <span
         aria-hidden="true"
-        className={`h-1.5 w-1.5 rounded-full ${live ? "bg-ember" : "bg-clay"}`}
+        className={`h-2 w-2 rounded-full ${
+          dark ? "bg-volt" : live ? "bg-azure" : "bg-teal"
+        }`}
       />
-      <span className={dark ? "text-ivory/70" : "text-ink/75"}>
+      <span className={dark ? "text-paper" : "text-ink/80"}>
         {t.work.status[status]}
       </span>
     </span>

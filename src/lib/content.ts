@@ -53,10 +53,12 @@ export interface Project {
    * Fondo propio del panel. Las piezas se apilan una sobre otra al hacer
    * scroll: si compartieran tono, el borde por el que una se desliza sobre la
    * anterior sería invisible y el corte parecería un error de maquetación.
-   * La secuencia va de oscuro a arena, oscureciéndose paso a paso.
+   * La secuencia alterna un bloque saturado (petróleo) con tres tintes claros
+   * —hielo, menta y celeste—, de modo que cada pieza se distingue de la
+   * anterior a simple vista.
    */
   surface: string;
-  /** Si el panel se compone sobre fondo oscuro. */
+  /** Si el panel es un bloque saturado, con texto claro encima. */
   dark: boolean;
 }
 
@@ -80,8 +82,8 @@ export const PROJECTS: Project[] = [
       "Theatre.js",
       "Motion",
     ],
-    accent: "#C2571E",
-    surface: "#171512",
+    accent: "#34F5A0",
+    surface: "#00695B",
     dark: true,
   },
   {
@@ -104,8 +106,8 @@ export const PROJECTS: Project[] = [
       "React Hook Form",
       "Zod",
     ],
-    accent: "#8A6A3F",
-    surface: "#F6F1E8",
+    accent: "#0A52D6",
+    surface: "#F2FCF9",
     dark: false,
   },
   {
@@ -128,8 +130,8 @@ export const PROJECTS: Project[] = [
       "Web Push",
       "PWA",
     ],
-    accent: "#A8542C",
-    surface: "#EDE4D5",
+    accent: "#00695B",
+    surface: "#D6F5E8",
     dark: false,
   },
   {
@@ -142,8 +144,8 @@ export const PROJECTS: Project[] = [
     status: "live",
     featured: false,
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "E-commerce"],
-    accent: "#6E5B47",
-    surface: "#E3D8C4",
+    accent: "#0A52D6",
+    surface: "#CDEBFB",
     dark: false,
   },
 ];

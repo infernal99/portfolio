@@ -113,21 +113,25 @@ export function Nav() {
 
   return (
     <>
-      {/* Marca + idioma: siempre visibles, en todas las anchuras. */}
-      <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-5 py-5 mix-blend-difference sm:px-8 lg:px-14">
+      {/*
+        Marca + idioma, siempre visibles. Son píldoras sólidas: antes el texto
+        se mezclaba por diferencia con lo de debajo, pero con fondos de colores
+        distintos esa mezcla da tonos que no son de la paleta.
+      */}
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-center justify-between px-5 py-4 sm:px-8 lg:px-14">
         <a
           href="#hero"
-          className="label text-ivory transition-opacity hover:opacity-60"
+          className="label slant pointer-events-auto bg-ink py-2 pl-4 pr-8 text-paper transition-colors hover:bg-azure"
         >
           Ian Monfil
         </a>
 
-        <div className="flex items-center gap-4">
+        <div className="pointer-events-auto flex items-center gap-2">
           <button
             type="button"
             onClick={toggle}
             aria-label={t.a11y.langToggle}
-            className="label flex items-center gap-2 text-ivory transition-opacity hover:opacity-60"
+            className="label flex items-center gap-2 rounded-full bg-paper/90 px-3.5 py-2 text-ink shadow-md shadow-ink/15 ring-1 ring-ink/10 backdrop-blur transition-colors hover:bg-paper"
           >
             <Flag lang={lang} />
             {lang === "es" ? "ES" : "EN"}
@@ -136,7 +140,7 @@ export function Nav() {
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="label text-ivory transition-opacity hover:opacity-60 lg:hidden"
+            className="label slant bg-volt py-2 pl-4 pr-7 text-ink shadow-md shadow-ink/20 transition-opacity hover:opacity-85 lg:hidden"
             aria-expanded={open}
             aria-controls="nav-overlay"
           >
@@ -145,12 +149,17 @@ export function Nav() {
         </div>
       </header>
 
-      {/* Índice numerado lateral — la navegación principal en escritorio. */}
+      {/*
+        Índice numerado lateral, la navegación principal en escritorio. Va en una
+        cápsula sólida para que se lea igual sobre hielo, azur o petróleo. El
+        nombre de la sección sale como una etiqueta flotante al apuntarla: así
+        no ensancha la cápsula ni invade el contenido.
+      */}
       <nav
-        className="fixed right-8 top-1/2 z-40 hidden -translate-y-1/2 lg:block xl:right-14"
+        className="fixed right-5 top-1/2 z-40 hidden -translate-y-1/2 lg:block xl:right-9"
         aria-label={t.nav.menu}
       >
-        <ul className="flex flex-col items-end gap-3">
+        <ul className="flex flex-col items-end gap-2.5 rounded-full bg-paper/90 px-3.5 py-4 shadow-lg shadow-ink/15 ring-1 ring-ink/10 backdrop-blur">
           {SECTION_IDS.map((id, i) => {
             const isActive = active === id;
             return (
@@ -158,32 +167,26 @@ export function Nav() {
                 <a
                   href={`#${id}`}
                   aria-current={isActive ? "true" : undefined}
-                  className="group flex items-center justify-end gap-3"
+                  className="group relative flex items-center gap-2.5"
                 >
-                  {/* El nombre solo aparece al apuntar. Mostrarlo siempre en
-                      la sección activa hacía el índice tan ancho que se
-                      superponía al contenido de la derecha. La sección activa
-                      se distingue igual: número en ámbar y raya más larga. */}
                   <span
-                    className={`label opacity-0 transition-all duration-300 group-hover:opacity-100 ${
-                      isActive ? "text-ember" : "text-ink/50"
-                    }`}
+                    className="label slant pointer-events-none absolute right-full mr-5 whitespace-nowrap bg-ink py-1.5 pl-3 pr-5 text-paper opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
                   >
                     {t.nav.sections[id]}
                   </span>
                   <span
                     className={`label tabular-nums transition-colors duration-300 ${
-                      isActive ? "text-ember" : "text-ink/35 group-hover:text-ink/70"
+                      isActive ? "text-azure" : "text-ink/75 group-hover:text-ink"
                     }`}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span
                     aria-hidden="true"
-                    className={`h-px transition-all duration-300 ${
+                    className={`h-[3px] transition-all duration-300 ${
                       isActive
-                        ? "w-8 bg-ember"
-                        : "w-3 bg-ink/30 group-hover:w-6 group-hover:bg-ink/60"
+                        ? "w-8 bg-azure"
+                        : "w-3 bg-ink/25 group-hover:w-6 group-hover:bg-ink/60"
                     }`}
                   />
                 </a>
@@ -198,7 +201,8 @@ export function Nav() {
         {open && (
           <motion.div
             id="nav-overlay"
-            className="fixed inset-0 z-[60] flex flex-col bg-ink px-5 pb-10 pt-5 sm:px-8 lg:hidden"
+            data-saturated
+            className="fixed inset-0 z-[60] flex flex-col bg-azure px-5 pb-10 pt-5 sm:px-8 lg:hidden"
             initial={reduced ? { opacity: 0 } : { clipPath: "inset(0 0 100% 0)" }}
             animate={reduced ? { opacity: 1 } : { clipPath: "inset(0 0 0% 0)" }}
             exit={reduced ? { opacity: 0 } : { clipPath: "inset(0 0 100% 0)" }}
@@ -208,7 +212,7 @@ export function Nav() {
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="label text-ivory"
+                className="label text-paper"
                 autoFocus
               >
                 {t.nav.close}
@@ -221,9 +225,9 @@ export function Nav() {
                   <a
                     href={`#${id}`}
                     onClick={() => setOpen(false)}
-                    className="font-display flex items-baseline gap-4 py-1 text-[clamp(2.6rem,13vw,4.5rem)] uppercase text-ivory"
+                    className="font-display flex items-baseline gap-4 py-1 text-[clamp(3.4rem,17vw,6rem)] text-paper"
                   >
-                    <span className="label text-ember">
+                    <span className="label text-volt">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     {t.nav.sections[id]}

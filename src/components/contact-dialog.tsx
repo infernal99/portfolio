@@ -57,8 +57,11 @@ export function ContactDialog({
   return (
     <dialog
       ref={ref}
+      data-saturated
       aria-labelledby="contact-dialog-title"
-      className="contact-dialog w-[min(38rem,calc(100vw-2rem))] rounded-xl border border-ivory/20 bg-ink p-0 text-ivory backdrop:bg-ink/70 backdrop:backdrop-blur-sm"
+      // m-auto no es decorativo: el preflight de Tailwind pone margin:0 a todo,
+      // y el <dialog> se centra con margin:auto. Sin él se queda en la esquina.
+      className="contact-dialog m-auto max-h-[calc(100dvh-2rem)] w-[min(38rem,calc(100vw-2rem))] overflow-y-auto rounded-xl border border-paper/40 bg-azure p-0 text-paper shadow-2xl shadow-ink/50 backdrop:bg-ink/60 backdrop:backdrop-blur-sm"
       // El cierre nativo por Escape se cancela: cerramos por estado, arriba.
       onCancel={(event) => {
         event.preventDefault();
@@ -70,10 +73,10 @@ export function ContactDialog({
         if (event.target === ref.current) onClose();
       }}
     >
-      <div className="flex items-start justify-between gap-6 border-b border-ivory/15 px-6 py-5 sm:px-8">
+      <div className="flex items-start justify-between gap-6 border-b border-paper/30 px-6 py-5 sm:px-8">
         <h2
           id="contact-dialog-title"
-          className="font-mono text-base uppercase tracking-[0.16em] text-ivory sm:text-lg"
+          className="font-mono text-base uppercase tracking-[0.16em] text-paper sm:text-lg"
         >
           {t.contact.form.heading}
         </h2>
@@ -81,7 +84,7 @@ export function ContactDialog({
           type="button"
           onClick={onClose}
           aria-label={t.nav.close}
-          className="-mr-2 -mt-1 rounded-md px-2 py-1 text-2xl leading-none text-ivory/60 transition-colors hover:text-ember"
+          className="-mr-2 -mt-1 rounded-md px-2 py-1 text-3xl leading-none text-paper transition-colors hover:text-volt"
         >
           ×
         </button>

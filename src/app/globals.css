@@ -1,25 +1,35 @@
 @import "tailwindcss";
 
 @theme {
-  /* Paleta cálida — cinco tonos, nada más. */
-  --color-ivory: #f6f1e8;
-  --color-ivory-dim: #ece5d8;
-  --color-sand: #e2d5c0;
-  --color-clay: #c4a88a;
-  --color-ink: #171512;
-  --color-ink-soft: #2a2620;
-  --color-ember: #c2571e;
+  /*
+   * Paleta de boxes: fondos claros en hielo, menta y celeste; azur eléctrico y
+   * verde petróleo para los bloques saturados; verde neón como acento.
+   *
+   * Los pares están medidos, no elegidos a ojo: azure y teal admiten texto
+   * paper (6,3:1) y acento volt (4,6:1) encima, que es lo que pasa en el
+   * manifiesto, el primer proyecto y el cierre.
+   */
+  --color-paper: #f2fcf9;
+  --color-paper-dim: #e0f5ef;
+  --color-mint: #a8e6d2;
+  --color-sky: #c6e8fa;
+  --color-ink: #04283a;
+  --color-ink-soft: #0b3b52;
+  --color-azure: #0a52d6;
+  --color-teal: #00695b;
+  --color-volt: #34f5a0;
 
-  --font-display: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-mono-label), ui-monospace, "SF Mono", monospace;
+  /* Barlow Condensed para titulares, Chakra Petch para rótulos de telemetría. */
+  --font-display: var(--font-barlow-condensed), "Arial Narrow", Impact, sans-serif;
+  --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-chakra-petch), ui-monospace, "SF Mono", monospace;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 :root {
   color-scheme: light;
-  --page-bg: var(--color-ivory);
+  --page-bg: var(--color-paper);
   --page-fg: var(--color-ink);
 }
 
@@ -54,26 +64,58 @@ html.lenis body {
 /* Tipografía                                                          */
 /* ------------------------------------------------------------------ */
 
+/* Titular de retransmisión: condensada, pesada, en cursiva y en mayúsculas. */
 .font-display {
   font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 0.92;
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  line-height: 0.88;
 }
 
+/* Rótulo de telemetría: angulosa, espaciada, siempre en mayúsculas. */
 .label {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-/* Recorte para revelados por línea: el hijo se desplaza dentro del padre. */
+/*
+ * Recorte para revelados por línea: el hijo se desplaza dentro del padre.
+ * La cursiva inclina las letras hacia la derecha, más allá de su caja: sin el
+ * relleno lateral, el recorte les comía el borde de la última letra.
+ */
 .mask-line {
   display: block;
   overflow: hidden;
   padding-bottom: 0.08em;
   margin-bottom: -0.08em;
+  padding-right: 0.14em;
+  margin-right: -0.14em;
+}
+
+/* ------------------------------------------------------------------ */
+/* Bordillo y corte en diagonal                                        */
+/* ------------------------------------------------------------------ */
+
+/* Franja de bordillo: el detalle que más grita "circuito". */
+.kerb {
+  height: 10px;
+  background: repeating-linear-gradient(
+    115deg,
+    var(--color-azure) 0 18px,
+    var(--color-paper) 18px 36px,
+    var(--color-volt) 36px 54px,
+    var(--color-paper) 54px 72px
+  );
+}
+
+/* Esquina cortada en bisel, como los rótulos de la parrilla de salida. */
+.slant {
+  clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
 }
 
 /* ------------------------------------------------------------------ */
@@ -142,7 +184,7 @@ html.lenis body {
 /* ------------------------------------------------------------------ */
 
 :focus-visible {
-  outline: 2px solid var(--color-ember);
+  outline: 2px solid var(--color-azure);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -154,7 +196,7 @@ html.lenis body {
   z-index: 200;
   padding: 0.75rem 1.25rem;
   background: var(--color-ink);
-  color: var(--color-ivory);
+  color: var(--color-paper);
   transform: translateY(-150%);
   transition: transform 0.2s var(--ease-out-soft);
 }
@@ -164,8 +206,23 @@ html.lenis body {
 }
 
 ::selection {
-  background: var(--color-ember);
-  color: var(--color-ivory);
+  background: var(--color-azure);
+  color: var(--color-paper);
+}
+
+/*
+ * Sobre un bloque saturado (azur o petróleo) el azur del foco y de la
+ * selección desaparece: ahí el acento es el verde neón.
+ */
+[data-saturated] :focus-visible,
+[data-saturated]:focus-visible {
+  outline-color: var(--color-volt);
+}
+
+[data-saturated] ::selection,
+[data-saturated]::selection {
+  background: var(--color-volt);
+  color: var(--color-ink);
 }
 
 /* La animación sirve al diseño; si el usuario la ha reducido, desaparece. */

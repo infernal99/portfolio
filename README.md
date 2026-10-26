@@ -8,7 +8,27 @@ npm run dev      # http://localhost:3000
 npm run build    # build de producción
 npm run lint
 npm run shots    # vuelve a capturar las imágenes de los proyectos
+npm run audit    # mide el contraste de todo el texto (necesita el dev server)
 ```
+
+## Diseño: paleta y tipografía
+
+Estética de retransmisión de motor (F1 / MotoGP) sobre una paleta clara
+verde-azul. Todo vive en [`src/app/globals.css`](src/app/globals.css).
+
+| Token | Valor | Uso |
+| --- | --- | --- |
+| `paper` / `paper-dim` | `#f2fcf9` / `#e0f5ef` | Fondos claros (hielo y menta) |
+| `mint` / `sky` | `#a8e6d2` / `#c6e8fa` | Tintes de apoyo |
+| `ink` | `#04283a` | Texto |
+| `azure` | `#0a52d6` | Acento sobre claro **y** bloque saturado (manifiesto, cierre) |
+| `teal` | `#00695b` | Bloque saturado verde (primer proyecto) |
+| `volt` | `#34f5a0` | Acento verde neón, solo sobre `azure` o `teal` |
+
+Tipografía: **Barlow Condensed** en cursiva y mayúsculas para los titulares,
+**Barlow** para el cuerpo y **Chakra Petch** para los rótulos de telemetría.
+El bordillo (`.kerb`) y el corte en bisel (`.slant`) son los dos motivos
+gráficos de circuito.
 
 ## Las imágenes de los proyectos
 
@@ -92,6 +112,20 @@ responde "enviado" y no manda nada.
 
 ## Decisiones que conviene no deshacer sin querer
 
+- **Los pares de color están medidos, no elegidos a ojo.** `volt` solo llega
+  a 4,6:1 sobre `azure` y `teal`, y se queda corto sobre cualquier fondo
+  claro; `azure` sirve de texto sobre claro (5,8:1) y de fondo con texto
+  `paper` (6,3:1). Antes de tocar un tono, ejecuta `npm run audit`.
+- **Los bloques saturados llevan `data-saturated`.** Sobre azur o petróleo el
+  aro de foco y la selección de texto azur desaparecerían; ese atributo los
+  pasa a verde neón (ver `globals.css`). Un bloque nuevo de fondo saturado
+  tiene que llevarlo.
+- **La cabecera y el índice lateral son píldoras sólidas.** Antes usaban
+  `mix-blend-mode: difference`, que sobre fondos de colores da tonos que no
+  son de la paleta (el blanco sobre azur salía naranja).
+- **El `<dialog>` lleva `m-auto`.** El preflight de Tailwind pone
+  `margin: 0` a todo y el diálogo se centra con `margin: auto`: sin él se
+  queda pegado a la esquina superior izquierda.
 - **El titular del hero se anima en CSS, no con Motion.** Es el LCP de la
   página: si su estado inicial dependiera de JavaScript, el nombre quedaría
   invisible hasta hidratar (o para siempre, si el bundle falla).

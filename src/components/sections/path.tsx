@@ -32,15 +32,15 @@ export function Path() {
     <section
       id="path"
       aria-label={t.nav.sections.path}
-      className="relative bg-ivory px-5 py-28 sm:px-8 lg:px-14 lg:pr-32 lg:py-40"
+      className="relative bg-paper px-5 py-28 sm:px-8 lg:px-14 lg:pr-32 lg:py-40"
     >
       <div className="grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
         {/* El encabezado acompaña al recorrido en vez de desaparecer al inicio. */}
         <header className="lg:sticky lg:top-32 lg:self-start">
           <Reveal>
-            <p className="label text-ember">{t.path.label}</p>
+            <p className="label text-azure">{t.path.label}</p>
           </Reveal>
-          <h2 className="font-display mt-4 max-w-[14ch] text-[clamp(2.2rem,6vw,4.75rem)]">
+          <h2 className="font-display mt-4 max-w-[12ch] text-[clamp(3.2rem,8.5vw,7rem)]">
             <MaskedLines lines={[t.path.title]} />
           </h2>
           <Reveal delay={0.12}>
@@ -56,7 +56,7 @@ export function Path() {
           />
           <motion.span
             aria-hidden="true"
-            className="absolute bottom-2 left-[7px] top-2 w-px origin-top bg-ember"
+            className="absolute bottom-2 left-[7px] top-2 w-px origin-top bg-azure"
             style={reduced ? { scaleY: 1 } : { scaleY: railScale }}
           />
 
@@ -77,27 +77,27 @@ export function Path() {
                     fondo, para que la línea no se vea cruzarlo por detrás. */}
                 <span
                   aria-hidden="true"
-                  className={`absolute left-0 top-1.5 h-[15px] w-[15px] rounded-full ring-4 ring-ivory ${
-                    isProduct ? "bg-ember" : "bg-clay"
+                  className={`absolute left-0 top-1.5 h-[15px] w-[15px] rounded-full ring-4 ring-paper ${
+                    isProduct ? "bg-azure" : "bg-teal"
                   }`}
                 />
 
                 <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                  <span className="label tabular-nums text-ink/45">
+                  <span className="label tabular-nums text-ink/70">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="label text-ember">
+                  <span className="label text-azure">
                     {PERIODS[lang][milestone.id]}
                   </span>
-                  <span className="label text-ink/55">
+                  <span className="label text-ink/75">
                     {t.path.kinds[milestone.kind]}
                   </span>
                 </div>
 
-                <h3 className="font-display mt-3 text-[clamp(1.5rem,2.6vw,2.1rem)] leading-tight">
+                <h3 className="font-display mt-3 text-balance text-[clamp(1.9rem,3.3vw,2.8rem)] leading-[0.95]">
                   {copy.title}
                 </h3>
-                <p className="mt-1.5 text-sm text-ink/60">{milestone.place}</p>
+                <p className="mt-1.5 text-sm text-ink/75">{milestone.place}</p>
                 <p className="mt-4 max-w-[60ch] text-sm leading-relaxed text-ink/75">
                   {copy.detail}
                 </p>

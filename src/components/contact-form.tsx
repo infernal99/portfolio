@@ -22,21 +22,21 @@ export function ContactForm({ showHeading = true }: { showHeading?: boolean }) {
     error === "not_configured" || error === "send_failed";
 
   const field =
-    "mt-2 w-full rounded-md border border-ivory/25 bg-ivory/[0.04] px-4 py-3 text-ivory placeholder:text-ivory/35 transition-colors focus:border-ember focus:outline-none focus:ring-1 focus:ring-ember";
+    "mt-2 w-full rounded-md border border-paper/50 bg-ink/25 px-4 py-3 text-paper placeholder:text-paper/60 transition-colors focus:border-volt focus:outline-none focus:ring-1 focus:ring-volt";
 
   return (
     <div>
       {showHeading && (
-        <h3 className="font-mono text-base uppercase tracking-[0.16em] text-ivory/75 sm:text-lg">
+        <h3 className="font-mono text-base uppercase tracking-[0.16em] text-paper/75 sm:text-lg">
           {copy.heading}
         </h3>
       )}
-      <p className="max-w-[46ch] text-sm text-ivory/60">{copy.intro}</p>
+      <p className="max-w-[46ch] text-sm text-paper/90">{copy.intro}</p>
 
       <form action={action} className="mt-6">
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
-            <label htmlFor={`${ids}-name`} className="label text-ivory/60">
+            <label htmlFor={`${ids}-name`} className="label text-paper">
               {copy.name}
             </label>
             <input
@@ -50,7 +50,7 @@ export function ContactForm({ showHeading = true }: { showHeading?: boolean }) {
             />
           </div>
           <div>
-            <label htmlFor={`${ids}-email`} className="label text-ivory/60">
+            <label htmlFor={`${ids}-email`} className="label text-paper">
               {copy.email}
             </label>
             <input
@@ -66,7 +66,7 @@ export function ContactForm({ showHeading = true }: { showHeading?: boolean }) {
         </div>
 
         <div className="mt-5">
-          <label htmlFor={`${ids}-message`} className="label text-ivory/60">
+          <label htmlFor={`${ids}-message`} className="label text-paper">
             {copy.message}
           </label>
           <textarea
@@ -99,16 +99,16 @@ export function ContactForm({ showHeading = true }: { showHeading?: boolean }) {
           {/* aria-live: quien use lector de pantalla se entera del resultado
               sin tener que ir a buscarlo. */}
           <p aria-live="polite" className="text-sm">
-            {sent && <span className="text-ember">{copy.ok}</span>}
+            {sent && <span className="text-volt">{copy.ok}</span>}
             {error && (
-              <span className="text-ivory/75">
+              <span className="text-paper">
                 {copy.errors[error]}
                 {offerFallback && (
                   <>
                     {" "}
                     <a
                       href={`mailto:${PROFILE.email}`}
-                      className="underline decoration-ivory/40 underline-offset-4 transition-colors hover:text-ember hover:decoration-ember"
+                      className="underline decoration-paper/40 underline-offset-4 transition-colors hover:text-volt hover:decoration-volt"
                     >
                       {PROFILE.email}
                     </a>
@@ -130,7 +130,7 @@ function SubmitButton({ label, pending }: { label: string; pending: string }) {
     <button
       type="submit"
       disabled={status.pending}
-      className="label rounded-full bg-ember px-7 py-3.5 text-ivory transition-opacity hover:opacity-85 disabled:opacity-60"
+      className="label slant bg-volt py-3.5 pl-8 pr-11 text-ink transition-opacity hover:opacity-85 disabled:opacity-60"
     >
       {status.pending ? pending : label}
     </button>

@@ -99,8 +99,14 @@ export function Hero() {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden px-5 pb-8 pt-24 sm:px-8 lg:px-14"
+      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden px-5 pb-10 pt-24 sm:px-8 lg:px-14"
       aria-label={t.nav.sections.hero}
+      // Dos focos de color sobre el hielo: verde neón arriba a la derecha, donde
+      // vive el objeto 3D, y azur abajo a la izquierda, bajo el nombre.
+      style={{
+        backgroundImage:
+          "radial-gradient(55% 55% at 82% 28%, rgba(52,245,160,0.34), transparent 70%), radial-gradient(60% 60% at 8% 92%, rgba(10,82,214,0.18), transparent 72%)",
+      }}
     >
       {/* Objeto 3D — detrás del nombre, nunca por delante de la lectura. */}
       <div
@@ -119,19 +125,25 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 flex flex-1 flex-col justify-center">
-        <p className="label fade-rise text-ink/55" style={{ animationDelay: "0.15s" }}>
-          {t.hero.role} — {t.hero.availability}
+        <p
+          className="fade-rise flex flex-wrap items-center gap-x-4 gap-y-2"
+          style={{ animationDelay: "0.15s" }}
+        >
+          <span className="label slant bg-azure py-1.5 pl-4 pr-7 text-paper">
+            {t.hero.role}
+          </span>
+          <span className="label text-ink/70">{t.hero.availability}</span>
         </p>
 
-        <h1 className="font-display mt-5 text-[clamp(4.2rem,17vw,15rem)] uppercase">
+        <h1 className="font-display mt-6 text-[clamp(5.2rem,29vw,21rem)] lg:text-[clamp(5.2rem,23vw,21rem)]">
           {nameLine(PROFILE.firstName, 0.25)}
-          <span className="block pl-[0.06em] text-ember">
+          <span className="block pl-[0.04em] text-azure">
             {nameLine(PROFILE.lastName, 0.36)}
           </span>
         </h1>
 
         <p
-          className="fade-rise mt-8 max-w-[34ch] text-balance text-lg leading-snug text-ink/75 sm:text-xl lg:max-w-[38ch] lg:text-2xl"
+          className="fade-rise mt-8 max-w-[34ch] text-balance text-xl font-medium leading-snug text-ink/80 sm:text-2xl lg:max-w-[38ch] lg:text-[1.7rem]"
           style={{ animationDelay: "0.62s" }}
         >
           {t.hero.lead}
@@ -144,16 +156,18 @@ export function Hero() {
       >
         <a
           href="#work"
-          className="label group inline-flex items-center gap-3 text-ink/60 transition-colors hover:text-ember"
+          className="label group inline-flex items-center gap-3 text-ink/70 transition-colors hover:text-azure"
         >
           <span
-            className="inline-block h-9 w-px bg-ink/30 transition-colors group-hover:bg-ember"
+            className="inline-block h-9 w-px bg-ink/30 transition-colors group-hover:bg-azure"
             aria-hidden="true"
           />
           {t.hero.scroll}
         </a>
-        <span className="label hidden text-ink/40 sm:block">2026</span>
+        <span className="label hidden text-ink/75 sm:block">2026</span>
       </div>
+
+      <div className="kerb absolute inset-x-0 bottom-0 z-10" aria-hidden="true" />
     </section>
   );
 }
@@ -174,17 +188,17 @@ function StaticSolid() {
       >
         <defs>
           <linearGradient id="solid-warm" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#e0a468" />
-            <stop offset="55%" stopColor="#c78a52" />
-            <stop offset="100%" stopColor="#a1552a" />
+            <stop offset="0%" stopColor="#34f5a0" />
+            <stop offset="50%" stopColor="#1f9bd8" />
+            <stop offset="100%" stopColor="#0a52d6" />
           </linearGradient>
         </defs>
         <g transform="translate(100 100)">
           <polygon
             points="0,-78 68,-39 68,39 0,78 -68,39 -68,-39"
             fill="none"
-            stroke="#171512"
-            strokeOpacity="0.22"
+            stroke="#04283a"
+            strokeOpacity="0.28"
             strokeWidth="1"
           />
           <polygon
@@ -193,8 +207,8 @@ function StaticSolid() {
           />
           <path
             d="M0,-52 L0,52 M-45,-26 L45,26 M45,-26 L-45,26"
-            stroke="#f6f1e8"
-            strokeOpacity="0.35"
+            stroke="#f2fcf9"
+            strokeOpacity="0.55"
             strokeWidth="1"
           />
         </g>

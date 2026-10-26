@@ -18,24 +18,24 @@ export function Stack() {
     <section
       id="stack"
       aria-label={t.nav.sections.stack}
-      className="relative z-10 border-t border-ink/10 bg-ivory px-5 py-28 sm:px-8 lg:px-14 lg:pr-32 lg:py-40"
+      className="relative z-10 border-t border-ink/10 bg-paper px-5 py-28 sm:px-8 lg:px-14 lg:pr-32 lg:py-40"
     >
       <header>
         <Reveal>
-          <p className="label text-ember">{t.stack.label}</p>
+          <p className="label text-azure">{t.stack.label}</p>
         </Reveal>
-        <h2 className="font-display mt-4 max-w-[12ch] text-[clamp(2.4rem,7vw,6rem)]">
+        <h2 className="font-display mt-4 max-w-[12ch] text-[clamp(3.2rem,9.5vw,8.5rem)]">
           <MaskedLines lines={[t.stack.title]} />
         </h2>
         <Reveal delay={0.1}>
-          <p className="mt-6 max-w-[46ch] text-ink/60">{t.stack.intro}</p>
+          <p className="mt-6 max-w-[46ch] text-ink/75">{t.stack.intro}</p>
         </Reveal>
       </header>
 
       <div className="mt-16 grid gap-x-10 gap-y-14 lg:mt-24 lg:grid-cols-3">
         {STACK.map((group, gi) => (
           <div key={group.id} className="border-t border-ink/15 pt-6">
-            <h3 className="label text-ink/45">{t.stack.groups[group.id]}</h3>
+            <h3 className="label text-ink/70">{t.stack.groups[group.id]}</h3>
             <ul className="mt-6 flex flex-col gap-1">
               {group.items.map((item, i) => (
                 <motion.li
@@ -45,10 +45,10 @@ export function Stack() {
                   viewport={{ once: true, margin: "-8%" }}
                   transition={{ duration: 0.45, delay: gi * 0.05 + i * 0.03 }}
                 >
-                  <span className="font-display group inline-flex cursor-default items-baseline gap-3 text-3xl transition-colors duration-300 hover:text-ember sm:text-4xl">
+                  <span className="font-display group inline-flex cursor-default items-baseline gap-3 text-4xl transition-colors duration-300 hover:text-azure sm:text-5xl">
                     <span
                       aria-hidden="true"
-                      className="label text-ink/25 transition-colors group-hover:text-ember"
+                      className="label text-ink/25 transition-colors group-hover:text-azure"
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -62,14 +62,14 @@ export function Stack() {
       </div>
 
       <div className="mt-20 border-t border-ink/15 pt-6">
-        <h3 className="label text-ink/45">{t.stack.languagesTitle}</h3>
+        <h3 className="label text-ink/70">{t.stack.languagesTitle}</h3>
         <ul className="mt-6 flex flex-wrap gap-x-10 gap-y-4">
           {LANGUAGES.map((l) => (
             <Reveal as="li" key={l.id}>
-              <span className="font-display text-2xl sm:text-3xl">
+              <span className="font-display text-3xl sm:text-4xl">
                 {t.stack.languages[l.id]}
               </span>
-              <span className="label ml-3 text-ember">{t.stack.levels[l.level]}</span>
+              <span className="label ml-3 text-azure">{t.stack.levels[l.level]}</span>
             </Reveal>
           ))}
         </ul>
